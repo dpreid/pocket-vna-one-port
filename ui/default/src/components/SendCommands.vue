@@ -88,17 +88,17 @@
         <!-- CALIBRATION COMMANDS-->
         <div v-if='mode == "single"' class="input-group" @mousedown="setDraggable(false)" @mouseup="setDraggable(true)">
           <span class="input-group-text" id="basic-addon1">Frequency</span>
-          <input type="number" :class="(parseFloat(frequency) >= 0 && parseFloat(frequency) < maxFrequency) ? 'form-control' : 'form-control is-invalid'" :min='minFrequency' :max='maxFrequency' placeholder="frequency" aria-label="freq" aria-describedby="basic-addon1" id="freq" v-model="frequency">
+          <input type="number" :class="(parseFloat(frequency) >= minFrequency && parseFloat(frequency) < maxFrequency) ? 'form-control' : 'form-control is-invalid'" :min='minFrequency' :max='maxFrequency' placeholder="frequency" aria-label="freq" aria-describedby="basic-addon1" id="freq" v-model="frequency">
           <span class="input-group-text" id="basic-addon1">MHz</span>
           <button id="request" type='button' class="btn btn-success btn-lg" @click="singleFreqCommand">Request</button>
         </div>
 
         <div v-else class="input-group" @mousedown="setDraggable(false)" @mouseup="setDraggable(true)">
           <span class="input-group-text" id="basic-addon1">Start</span>
-          <input type="number" :class="(parseFloat(frequency) >= 0 && parseFloat(frequency) < maxFrequency) ? 'form-control' : 'form-control is-invalid'" :min='minFrequency' :max='maxFrequency' placeholder="Start frequency" aria-label="freq" aria-describedby="basic-addon1" id="freq" v-model="frequency" @change="setCalibrated(false)">
+          <input type="number" :class="(parseFloat(frequency) >= minFrequency && parseFloat(frequency) < maxFrequency) ? 'form-control' : 'form-control is-invalid'" :min='minFrequency' :max='maxFrequency' placeholder="Start frequency" aria-label="freq" aria-describedby="basic-addon1" id="freq" v-model="frequency" @change="setCalibrated(false)">
           <span class="input-group-text" id="basic-addon1">MHz</span>
           <span class="input-group-text" id="basic-addon1">End</span>
-          <input type="number" :class="(parseFloat(frequency_end) >= 0 && parseFloat(frequency_end) <= maxFrequency && parseFloat(frequency_end) > frequency) ? 'form-control' : 'form-control is-invalid'" :min='minFrequency' :max='maxFrequency' placeholder="End frequency" aria-label="freq" aria-describedby="basic-addon1" id="freq_end" v-model="frequency_end" @change="setCalibrated(false)">     
+          <input type="number" :class="(parseFloat(frequency_end) >= minFrequency && parseFloat(frequency_end) <= maxFrequency && parseFloat(frequency_end) > frequency) ? 'form-control' : 'form-control is-invalid'" :min='minFrequency' :max='maxFrequency' placeholder="End frequency" aria-label="freq" aria-describedby="basic-addon1" id="freq_end" v-model="frequency_end" @change="setCalibrated(false)">     
           <span class="input-group-text" id="basic-addon1">MHz</span>
           
         </div>
@@ -240,7 +240,7 @@ export default {
         mode: 'range',  // or 'range'
         frequency: 1.0,   //MHz
         frequency_end: 4.0, //MHz
-        minFrequency: 0,
+        minFrequency: 0.5,
         maxFrequency: 4000.0, //MHz
         units: 1E6,
         s11: true,
