@@ -42,8 +42,9 @@ The expected build procedure (not tested from scratch) is as follows:
 cd ~/pocket-vna-one-port/ui/default
 ```
 3) Install all necessary packages from the 'package.json' file: ```npm install```
-4) Build for development and testing: ```npm run dev```
-5) Build for production: ```npm run build``` - the dist folder will contain the built files for deployment
+4) Set the ```VITE_BASE``` in ```.env.production``` to the necessary base path. 
+5) Build for development and testing: ```npm run dev```
+6) Build for production: ```npm run build``` - the dist folder will contain the built files for deployment
 
 # TODO
 
