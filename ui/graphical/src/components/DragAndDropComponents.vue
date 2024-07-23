@@ -6,7 +6,7 @@
       <div v-for='image in display' :key='image.type' class='col-md-3'>
           <div class='dragbox' @dragstart="dragImage(image)" @dragover.prevent @dragenter.prevent @touchstart="dragImage(image); dropPort1()">
               <!-- <img class='dragbox-image' :id='image.type' :src='require(`/images/${image.img}.png`)' :alt='image.type' :hidden='port1 == image || port2 == image'> -->
-              <img class='dragbox-image' :id='image.type' :src='"/images/" + image.img + ".png"' :alt='image.type' :hidden='port1 == image || port2 == image'>
+              <img class='dragbox-image' :id='image.type' :src='basePath + "images/" + image.img + ".png"' :alt='image.type' :hidden='port1 == image || port2 == image'>
           
             </div>
           <figcaption class='txt-primary fig'>{{ image.type }}</figcaption>
@@ -23,12 +23,12 @@
 
         <div v-if='getSParams.length > 1' class='dropbox mb-2' id='port2' @drop='dropPort2' @dragleave='removePort2'>
             <!-- <img v-if='port2 != ""' class='dropbox-image' :id='port2.type' :src='require(`/images/${port2.img}.png`)' :alt='port2.type'> -->
-            <img v-if='port2 != ""' class='dropbox-image' :id='port2.type' :src='"/images/" + port2.img + ".png"' :alt='port2.type'>
+            <img v-if='port2 != ""' class='dropbox-image' :id='port2.type' :src='basePath + "images/" + port2.img + ".png"' :alt='port2.type'>
         </div>
 
         <div class='dropbox' id='port1' @drop='dropPort1' @dragleave='removePort1'>
             <!-- <img v-if='port1 != ""' class='dropbox-image' :id='port1.type' :src='require(`/images/${port1.img}.png`)' :alt='port1.type'> -->
-            <img v-if='port1 != ""' class='dropbox-image' :id='port1.type' :src='"/images/" + port1.img + ".png"' :alt='port1.type'>
+            <img v-if='port1 != ""' class='dropbox-image' :id='port1.type' :src='basePath + "images/" + port1.img + ".png"' :alt='port1.type'>
         </div>
       </div>
 
@@ -74,7 +74,10 @@ export default {
     computed:{
         ...mapGetters([
             'getSParams',
-        ])
+        ]),
+        basePath(){
+            return import.meta.env.VITE_BASE;
+        }
     },
     watch:{
         
